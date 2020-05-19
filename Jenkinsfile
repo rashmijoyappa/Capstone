@@ -50,7 +50,6 @@ pipeline {
 				}
 			}
 		}
-
 		stage('Deploy green container') {
 			steps {
 				withAWS(region:'us-west-2', credentials:'capstone') {
