@@ -14,7 +14,7 @@ pipeline {
 					sh '''
 						
 						docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-						docker build -t rashmijoyappa/capstone .
+						docker build -t Udacity/capstone .
 					'''
 				}
 			}
@@ -25,7 +25,7 @@ pipeline {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
 						docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-						docker push rashmijoyappa/capstone
+						docker push Udacity/capstone
 					'''
 				}
 			}
@@ -33,7 +33,7 @@ pipeline {
 
 		stage('Set current kubectl context') {
 			steps {
-				withAWS(region:'us-east-1', credentials:'capstone') {
+				withAWS(region:'us-west-2', credentials:'capstone') {
 					sh '''
 						kubectl config use-context arn:aws:eks:us-west-2:813896050774:cluster/capstonecluster
 					'''
